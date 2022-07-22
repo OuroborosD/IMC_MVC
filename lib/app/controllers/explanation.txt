@@ -1,0 +1,1 @@
+controla a comnicação entre o model e a view

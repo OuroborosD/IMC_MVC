@@ -1,0 +1,2 @@
+*controla tudo que vai ser redenrizado, ou seja as paginas.
+*input e output de dados
