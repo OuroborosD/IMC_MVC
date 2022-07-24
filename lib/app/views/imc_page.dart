@@ -20,22 +20,50 @@ class _Imc_PageState extends State<Imc_Page> {
 
   double? imc;
   String status = 'aguardados dados';
-  String? Img_path;
+  int Img_path = 0;
+
+  List<Color> lista_cores =[
+    Colors.blue,
+    Colors.yellow,
+    Colors.blue,
+    Colors.green,
+    Colors.red,
+  ];
+
+  Imc person = Imc();
 
   bool get empty => Img_path == null;
   bool get empty_imc => imc == null;
-                  
+  bool get empty_heigth => person.weight == 0;
   void send_input() {
-     
-    Imc person =  Imc(int.parse(input_heigth.text),double.parse(input_weigth.text));
-    Controller_Imc p1 = Controller_Imc();
-    input_heigth.clear();
-    input_weigth.clear();
-    setState(() {
-      imc = person.imc_calc();
-      Img_path = p1.img(imc!);
-      status = p1.status(imc!);
-    });
+    person.height = int.parse(input_heigth.text);
+    person.weight = double.parse(input_weigth.text);
+    if (person.height != 0 && person.weight != 0) {
+      input_heigth.clear();
+      input_weigth.clear();
+      Controller_Imc p1 = Controller_Imc();
+      setState(() {
+        print('h:${person.height}   ---  w:${person.weight}');
+        imc = person.imc_calc();
+        Img_path = p1.img(imc!);
+        status = p1.status(imc!);
+      });
+    } else {
+      showDialog(
+          context: context,
+          builder: (context) => AlertDialog(
+                title: Text(empty_heigth
+                    ? 'Weigth invalid! put a number beetwen 5 and 400 KG'
+                    : 'Heigth invalid! put a number beetwen 20 and 250 CM'),
+                actions: [
+                  TextButton(
+                      onPressed: () {
+                        Navigator.of(context).pop();
+                      },
+                      child: Text('voltar'))
+                ],
+              ));
+    }
   }
 
   @override
@@ -86,10 +114,72 @@ class _Imc_PageState extends State<Imc_Page> {
                   child: Column(
                       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                       children: [
-                        Image.asset( empty ? 'assets/images/normal.png' : Img_path!,
-                            height: 94, width: 62, fit: BoxFit.scaleDown),
-                        Text(status),
-                        Text(empty_imc ? 'Imc não foi calculado ainda' : 'imc: $imc'),
+                        // Image.asset(
+                        //     empty ? 'assets/images/normal.png' : Img_path!,
+                        //     height: 94,
+                        //     width: 62,
+                        //     fit: BoxFit.scaleDown),
+                        Padding(
+                          padding: const EdgeInsets.symmetric(vertical: 10),
+                          child: Card(
+                            elevation: 6,
+                            shape: RoundedRectangleBorder(
+                                    borderRadius: BorderRadius.circular(24)),
+                            child: Row(
+                              
+                              children: [
+                                Flexible(
+                                  flex:8,
+                                  fit: FlexFit.tight,
+                                  child: Container(
+                                      padding: EdgeInsets.fromLTRB(20,20,0,20),
+                                      decoration: BoxDecoration(
+                                          borderRadius: BorderRadius.only(
+                                              // para fazer o topo do conteiner ficar coma borda redonda
+                                              topLeft: Radius.circular(40.0),
+                                              bottomLeft: Radius.circular(40.0),
+                                            ),
+                                          border: Border.all(
+                                              color: lista_cores[Img_path] as Color, width: 4)),
+                                          
+                                      child: Text(
+                                        status,
+                                        overflow: TextOverflow.fade,
+                                      )),
+                                ),
+                                Flexible(
+                                  flex:5,
+                                  fit: FlexFit.tight,
+                                  child: Container(
+                                    
+                                    padding: EdgeInsets.symmetric(
+                                        vertical: 18),
+                                    decoration: BoxDecoration(
+                                       color: lista_cores[Img_path] as Color, 
+                                       borderRadius: BorderRadius.only(
+                                              // para fazer o topo do conteiner ficar coma borda redonda
+                                              topRight: Radius.circular(40.0),
+                                              bottomRight: Radius.circular(40.0),
+                                            ),
+                                        border: Border.all(
+                                            color: lista_cores[Img_path] as Color, width: 4)),
+                                    child: Text(
+                                        empty_imc
+                                            ? '0'
+                                            : 'Imc: ${imc!.toStringAsFixed(2)}',
+                                        style: TextStyle(
+                                          //background: Colors.blue,
+                                          color: Colors.white,
+                                          fontSize: 16,
+                                          fontWeight: FontWeight.bold
+                                        ),
+                                        overflow: TextOverflow.fade),
+                                  ),
+                                )
+                              ],
+                            ),
+                          ),
+                        ),
                         Container(
                           padding: EdgeInsets.symmetric(vertical: 5),
                           child: Card(

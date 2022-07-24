@@ -1,16 +1,12 @@
 # imc_app
 
-A new Flutter project.
+a simple project made using the mvc pattern
 
-## Getting Started
+## features
 
-This project is a starting point for a Flutter application.
+![normal weight](https://i.ibb.co/Fg42RwZ/Whats-App-Image-2022-07-24-at-01-48-19.jpg)
+![error message](https://i.ibb.co/7j0xvf7/Whats-App-Image-2022-07-24-at-01-48-19-1.jpg)
+![overweight](https://i.ibb.co/RQhRyxj/Whats-App-Image-2022-07-24-at-01-09-20.jpg)
 
-A few resources to get you started if this is your first Flutter project:
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
-
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+design from[Calcule seu imc by renan campos torres](https://appadvice.com/app/calcule-seu-imc/1526184240)

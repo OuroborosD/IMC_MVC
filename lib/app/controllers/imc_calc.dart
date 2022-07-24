@@ -3,18 +3,18 @@ import '../models/imc.dart';
 
 class Controller_Imc{
   
-  String img(double imc){
-    String img='';
+  int img(double imc){
+    int img;
     if(imc <= 20){
-      img = 'assets/images/sobrepeso.png';
+      img = 1;
     }else if(imc <=29.9){
-      img = 'assets/images/normal.png';
+      img = 2;
 
     }else if(imc <=34.9){
-      img = 'assets/images/obeso1.png';
+      img = 3;
  
     }else{
-      img = 'assets/images/obeso2.png';
+      img = 4;
     }
 
     return img;
@@ -25,13 +25,13 @@ class Controller_Imc{
     if(imc <= 20){
       status = 'Sobrepeso';
     }else if(imc <=29.9){
-      status = 'peso normal';
+      status = 'IMC Normal';
 
     }else if(imc <=34.9){
-      status = 'obesidade moderada';
+      status = 'Obesidade I';
  
     }else{
-      status = 'obesidade severa';
+      status = 'Obesidade II';
     }
     return status;
   }
